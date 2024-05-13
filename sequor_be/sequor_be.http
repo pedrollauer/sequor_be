@@ -1,0 +1,6 @@
+@sequor_be_HostAddress = http://localhost:5270
+
+GET {{sequor_be_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
