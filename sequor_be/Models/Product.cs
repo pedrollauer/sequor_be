@@ -10,7 +10,6 @@ namespace sequor_be.Models
         [MaxLength(50)]
         public string ProductDescription { get; set; }
 
-        [MaxLength(500)]
         public string Image { get; set; }
 
         public decimal CycleTime { get; set; }

@@ -6,7 +6,7 @@ using sequor_be.Models;
 namespace sequor_be.Controllers
 {
     [ApiController]
-    [Route("api/orders/setProduction")]
+    [Route("api/orders/SetProduction")]
     public class SetProduction : ControllerBase
     {
         private readonly DataContext _context;
@@ -49,7 +49,7 @@ namespace sequor_be.Controllers
 
                 if(model.ProductionDate < initialDate || model.ProductionDate > endDate)
                 {
-                    Response response = new Response("A data de apontamento deve ser validada com a data de inicio e fim cadastradas\r\npara o usuário.");
+                    Response response = new Response("A data de apontamento deve ser validada com a data de inicio e fim cadastradas para o usuário.");
                     return CreatedAtAction("Post", response);
 
                 }
@@ -71,21 +71,15 @@ namespace sequor_be.Controllers
                     return CreatedAtAction("Post", response); 
                 }
 
-                if(model.CycleTime <= 0 )
-                {
-                    Response response = new Response("A quantidade deve ser maior que zero e menor do que a quantidade da ordem selecionada.");
-                    return CreatedAtAction("Post", response);
-
-                }
 
                 string description = "";
 
-                if (model.CycleTime < orders.Quantity)
+                if (model.CycleTime < orders.CycleTime)
                 {
-                    description = "O tempo de ciclo informado é menor do que o tempo de ciclo do produto.";
+                    description = "O apuntamento foi criado porém, tempo de ciclo informado é menor do que o tempo de ciclo do produto.";
                 }
 
-                if(description.Length>0)
+                if(description.Length==0)
                 {
                     description = "Apuntamento realizado com sucesso.";
                 }
